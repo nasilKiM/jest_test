@@ -12,6 +12,10 @@ test("초기 할일 목록이 있는 TodoList 컴포넌트를 렌더링합니다
   // 초기 랜더링.
   expect(getByText("TypeScript 배우기")).toBeTruthy();
   expect(getByText("Next.js 앱 만들기")).toBeTruthy();
+
+  initialTodos.forEach((todo) => {
+    expect(getByText(todo.text)).toBeTruthy();
+  });
 });
 
 test("폼 제출 시 새로운 할일을 추가합니다.", () => {

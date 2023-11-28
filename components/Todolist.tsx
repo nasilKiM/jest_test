@@ -19,7 +19,9 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
 
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log("추가:", newTodo);
+    if (newTodo.trim() !== "") {
+      console.log("추가:", newTodo);
+    }
   };
 
   return (
