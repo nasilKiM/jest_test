@@ -8,9 +8,10 @@ interface Todo {
 
 interface TodoListProps {
   todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ todos }) => {
+const TodoList: React.FC<TodoListProps> = ({ todos, setTodos }) => {
   const [newTodo, setNewTodo] = useState<string>("");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -19,9 +20,13 @@ const TodoList: React.FC<TodoListProps> = ({ todos }) => {
 
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (newTodo.trim() !== "") {
-      console.log("추가:", newTodo);
-    }
+    const newTodoItem: Todo = {
+      id: todos.length + 1,
+      text: newTodo,
+      completed: false,
+    };
+    setTodos((prevTodos) => [...prevTodos, newTodoItem]);
+    setNewTodo("");
   };
 
   return (

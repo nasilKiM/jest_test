@@ -7,9 +7,8 @@ test("초기 할일 목록이 있는 TodoList 컴포넌트를 렌더링합니다
     { id: 2, text: "Next.js 앱 만들기", completed: true },
   ];
 
-  const { getByText }: RenderResult = render(<TodoList todos={initialTodos} />);
+  const { getByText }: RenderResult = render(<TodoList todos={initialTodos} setTodos={() => {}} />);
 
-  // 초기 랜더링.
   expect(getByText("TypeScript 배우기")).toBeTruthy();
   expect(getByText("Next.js 앱 만들기")).toBeTruthy();
 
@@ -24,7 +23,9 @@ test("폼 제출 시 새로운 할일을 추가합니다.", () => {
     { id: 2, text: "Next.js 앱 만들기", completed: true },
   ];
 
-  const { getByRole, getByText }: RenderResult = render(<TodoList todos={initialTodos} />);
+  const { getByRole, getByText }: RenderResult = render(
+    <TodoList todos={initialTodos} setTodos={() => {}} />
+  );
 
   const inputElement = getByRole("textbox");
   fireEvent.change(inputElement, { target: { value: " 테스트하기" } });
